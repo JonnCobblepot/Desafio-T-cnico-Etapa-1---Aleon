@@ -1,6 +1,7 @@
 import hashlib
 import time
 import requests
+import pandas as pd
 
 
 #? Função para manipular os parâmetros e retornar a URL de Requisição
@@ -59,14 +60,21 @@ def extraction_data():
 marvel_data = extraction_data()
 
 
-# Verificando se os dados foram obtidos com sucesso
+# Verificando se os dados foram obtidos com sucesso e caso sim, os mostra na saída, agora de forma tabular
 if marvel_data is not None and len(marvel_data) > 0:
     print("Dados extraídos com sucesso!")
     print("-----------------------------------PERSONAGENS MARVEL-----------------------------------")
 
-    for character in marvel_data:
-        print(f"Nome: {character['name']} \nDescrição: {character['description']}")
-        print("----------------------------------------------------------------------------------------")
+    # Uma list comprehension já adiantando a parte de simplificação do código, aqui a respeito da renomeação das classes dos characters
+    marvel_table = [{"ID": character['id'], "Nome": character['name'], "Descrição": character['description'], "Modificado em": character['modified']}
+        for character in marvel_data]
+
+    # Passando para um DataFrame do Pandas
+    df_marvel = pd.DataFrame(marvel_table)
+
+    # Mostrando os dados na tela de forma tabular
+    print("\nDados na formatação tabular com pantas:")
+    print(df_marvel)
 
 else:
     print("Falha ao extrair os dados!")
