@@ -7,6 +7,12 @@ import matplotlib.pyplot as plt
 
 #? Função para manipular os parâmetros e retornar a URL de Requisição
 def generate_parameter():
+    """
+    Gera a URL de requisição da API Marvel
+    Essa função utiliza as chaves pública e privada, o timestamp, o hash e a quantidade de personagens desejada.
+
+    Retorna a URL formatada para a requisição
+    """
 
     #! Chaves publicas e privadas (coloquei as minhas para obter meus parâmetros e testar o endpoint)
     PUBLIC_KEY = "f957679ebe331b5cb3de7d6bc8531e39"
@@ -33,6 +39,11 @@ def generate_parameter():
 
 #? Função para extrair os dados da API da Marvel
 def extraction_data():
+    """
+    Extrai os dados da API Marvel a partir da requisição URL da função anterior, extraindo em formato JSON
+
+    Retorna a lista de personagens se a requisição for um sucesso, ou None se falhar
+    """
 
     # Obtendo a URL
     URL = generate_parameter()
@@ -59,6 +70,14 @@ def extraction_data():
 
 #? Função para plotar o gráfico de barras com a contagem por ano de modificação
 def plot_gBarra_contagem_por_ano(df):
+    """
+    Plota um gráfico de barras com a contagem de personagens modificados por ano
+
+    Argumento: df que é DataFrame contendo a coluna 'Ano de Modificação' e sendo df_marvel 
+
+    Returns: None, entretanto, plota o gráfico
+    """
+
     anos = df['Ano de Modificação'].value_counts().sort_index()
     plt.figure(figsize=(5, 12))
     plt.bar(anos.index, anos.values, color='blue')
@@ -73,6 +92,14 @@ def plot_gBarra_contagem_por_ano(df):
 
 #? Função para plotar o gráfico de pizza com percentual dos personagens que possuem ou não descrição (seu resumo/história)
 def plot_gPercentual_descricao(df):
+    """
+    Plota um gráfico de pizza com o percentual de personagens com e sem descrição
+
+    Argumento: df que é DataFrame contendo a coluna 'Ano de Modificação' e sendo df_marvel 
+
+    Returns: None, entretanto, plota o gráfico
+    """
+
     descricao_contagem = df['Possui Descrição'].value_counts()
     plt.figure(figsize=(8, 8))
     plt.pie(descricao_contagem, labels=descricao_contagem.index, autopct='%1.1f%%', startangle=90, colors=['blue', 'red'])
@@ -82,6 +109,14 @@ def plot_gPercentual_descricao(df):
 
 #? Função para plotar o gráfico de dispersão para análise da coexistência ou não de uma relação entre ID e Ano 
 def plot_gDispersao_id_ano(df):
+    """
+    Plota um gráfico de dispersão que relaciona os ID dos personagens com anos de modificação
+
+    Argumento: df que é DataFrame contendo a coluna 'Ano de Modificação' e sendo df_marvel 
+
+    Returns: None, entretanto, plota o gráfico
+    """
+
     plt.figure(figsize=(10, 6))
     plt.scatter(df['ID'], df['Ano de Modificação'], alpha=0.7, color='green')
     plt.title('Relação entre ID e Ano de Modificação', fontsize=14)
@@ -94,6 +129,11 @@ def plot_gDispersao_id_ano(df):
 
 #? Função principal para a execução do programa
 def main():
+    """
+    Executa o programa principal chamando todas as funções
+
+    Returns: None, mas executa e chama as demais funções para plotar gráficos e output tabular dos dados
+    """
 
     # Dados da Marvel (nesse caso, referente aos personagens/characters, mas poderia ser comics ou outro trocando na URL)
     marvel_data = extraction_data()
