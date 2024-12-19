@@ -72,8 +72,11 @@ if marvel_data is not None and len(marvel_data) > 0:
     # Passando para um DataFrame do Pandas
     df_marvel = pd.DataFrame(marvel_table)
 
+    # Alterando a formatção de 'modified'
+    df_marvel['Modificado em'] = pd.to_datetime(df_marvel['Modificado em'], utc=True).dt.strftime('%d/%m/%Y %H:%M:%S')
+
     # Mostrando os dados na tela de forma tabular
-    print("\nDados na formatação tabular com pantas:")
+    print("\nDados na formatação tabular com Pandas:")
     print(df_marvel)
 
 else:
