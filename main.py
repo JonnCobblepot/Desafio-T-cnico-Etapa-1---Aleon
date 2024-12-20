@@ -15,8 +15,8 @@ def generate_parameter():
     """
 
     #! Chaves publicas e privadas (coloquei as minhas para obter meus parâmetros e testar o endpoint)
-    PUBLIC_KEY = "f957679ebe331b5cb3de7d6bc8531e39"
-    PRIVATE_KEY = "07f8a233c3b078deb6371d3a7a988461c0e2bc42"
+    PUBLIC_KEY = "...coloque aqui sua chave..."
+    PRIVATE_KEY = "...coloque aqui sua chave..."
 
     # Valor do ts (timestamp) sendo a data e horário atual
     ts = str(time.time())
